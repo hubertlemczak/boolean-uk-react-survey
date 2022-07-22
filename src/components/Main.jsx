@@ -30,9 +30,11 @@ function Main() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const item = formAnswers.find((i) => i.id === formFields.id);
-    if (item) setFormAnswers([...formAnswers, { ...formFields }]);
-    else setFormAnswers([...formAnswers, { id: id++, ...formFields }]);
+    if (item) {setFormAnswers(formAnswers.map((i) => (i === item ? { ...formFields } : i)));
+    } else setFormAnswers([...formAnswers, { id: id++, ...formFields }]);
+    
     setFormFields(initialFormFields);
   };
 
@@ -40,9 +42,6 @@ function Main() {
     const item = formAnswers.find((i) => i.id === id);
     setFormFields(item);
   };
-  useEffect(() => {
-    console.log(formAnswers);
-  }, [formAnswers]);
 
   return (
     <main className="main">
